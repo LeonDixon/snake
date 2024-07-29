@@ -24,9 +24,15 @@ impl UserInput {
         }
     }
 
-    // pub fn check_direction_change_is_valid(current ) {
-
-    // }
+    fn check_direction_change_is_valid(&self, direction: &String) -> bool {
+        match direction.as_str() {
+            "right" => return &self.current_direction != "left",
+            "left" => return &self.current_direction != "right",
+            "up" => return &self.current_direction != "down",
+            "down" => return &self.current_direction != "up",
+            _ => panic!("unsupported direction"),
+        }
+    }
 
     pub fn get_direction(&mut self) -> &String {
         let keys_pressed: HashSet<KeyCode> = get_keys_pressed();
@@ -38,8 +44,13 @@ impl UserInput {
                 || **key == KeyCode::Up
         });
 
+        //TODO need to add a pending direction to hold the non commited direction
+
         if movement_key.is_some() {
-            self.current_direction = self.transform_key_pressed_to_direction(movement_key.unwrap());
+            let new_direction = self.transform_key_pressed_to_direction(movement_key.unwrap());
+            if self.check_direction_change_is_valid(&new_direction) {
+                self.current_direction = new_direction
+            }
         }
 
         return &self.current_direction;
