@@ -45,11 +45,11 @@ async fn main() {
         clear_background(WHITE);
 
         let new_time = (get_time() * 1.00).floor() as i32;
-        user_input = user_input.get_direction();
+        user_input.get_direction();
 
         if new_time > game_time {
             let tail_position = snake.get_tail_position();
-            snake.slither(&user_input.last_key_pressed);
+            snake.slither(user_input.get_direction());
             if check_food_collision(&snake, &food) {
                 snake.add_body_part(SnakeBodyPart::new(tail_position.x, tail_position.y))
             }

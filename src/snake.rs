@@ -43,7 +43,7 @@ impl Snake {
         self.body.push(body_part);
     }
 
-    pub fn slither(&mut self, direction: &KeyCode) {
+    pub fn slither(&mut self, direction: &str) {
         let mut previous_parts_position = Position {
             x: self.head_x_position.clone(),
             y: self.head_y_position.clone(),
@@ -59,10 +59,10 @@ impl Snake {
         }
 
         match direction {
-            KeyCode::Right => self.update_x_position(40.0),
-            KeyCode::Left => self.update_x_position(-40.0),
-            KeyCode::Up => self.update_y_position(-40.0),
-            KeyCode::Down => self.update_y_position(40.0),
+            "right" => self.update_x_position(40.0),
+            "left" => self.update_x_position(-40.0),
+            "up" => self.update_y_position(-40.0),
+            "down" => self.update_y_position(40.0),
             _ => panic!("error"),
         }
     }
