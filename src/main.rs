@@ -43,7 +43,7 @@ async fn run_snake_game() {
 
     'game_loop: loop {
         clear_background(WHITE);
-        let new_time = ((get_time() * 4.0) * 1.00).floor() as i32;
+        let new_time = ((get_time() * 6.0) * 1.00).floor() as i32;
 
         user_input.get_user_input();
 
@@ -82,8 +82,20 @@ async fn run_snake_game() {
         draw_rectangle(snake.head_x, snake.head_y, 40.0, 40.0, GREEN);
         match user_input.current_direction.as_str() {
             "right" => {
-                draw_rectangle(snake.head_x + 25.0, snake.head_y + 5.0, 10.0, 10.0, BLACK);
-                draw_rectangle(snake.head_x + 30.0, snake.head_y + 25.0, 15.0, 5.0, RED);
+                draw_rectangle(snake.head_x + 30.0, snake.head_y + 5.0, 10.0, 10.0, BLACK);
+                draw_rectangle(snake.head_x + 30.0, snake.head_y + 25.0, 10.0, 10.0, BLACK);
+            }
+            "left" => {
+                draw_rectangle(snake.head_x, snake.head_y + 5.0, 10.0, 10.0, BLACK);
+                draw_rectangle(snake.head_x, snake.head_y + 25.0, 10.0, 10.0, BLACK);
+            }
+            "up" => {
+                draw_rectangle(snake.head_x + 5.0, snake.head_y, 10.0, 10.0, BLACK);
+                draw_rectangle(snake.head_x + 25.0, snake.head_y, 10.0, 10.0, BLACK);
+            }
+            "down" => {
+                draw_rectangle(snake.head_x + 5.0, snake.head_y + 30.0, 10.0, 10.0, BLACK);
+                draw_rectangle(snake.head_x + 25.0, snake.head_y + 30.0, 10.0, 10.0, BLACK);
             }
             _ => (),
         }
